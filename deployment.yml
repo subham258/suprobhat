@@ -14,13 +14,13 @@ spec:
       labels:
         app: httpd
     spec:
+      volumes:
+      - name: site-data
+        persistentVolumeClaim:
+          claimName: task-pv-claim
       containers:
       - name: httpd
         image: nginx:1.14.2
         volumeMounts:
         - mountPath: "/usr/share/nginx/html"
           name: site-data      
-    volumes:
-    - name: site-data
-      persistentVolumeClaim:
-        claimName: task-pv-claim  
