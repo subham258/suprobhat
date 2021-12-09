@@ -17,5 +17,8 @@ spec:
       containers:
       - name: httpd
         image: httpd
+        volumeMounts:
+        - mountPath: mnt/data
+          name: subham-volume
         ports:
         - containerPort: 80
