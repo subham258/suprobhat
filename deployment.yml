@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: httpd
-        image: nginx
+        image: nginx:1.14.2
         volumeMounts:
         - mountPath: "/usr/share/nginx/html"
           name: site-data      
