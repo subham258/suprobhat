@@ -16,9 +16,11 @@ spec:
     spec:
       containers:
       - name: httpd
-        image: httpd
+        image: nginx
         volumeMounts:
-        - mountPath: /var/www/html
-          name: subham-volume
-        ports:
-        - containerPort: 80
+        - mountPath: "/usr/share/nginx/html"
+          name: site-data      
+    volumes:
+    - name: site-data
+      persistentVolumeClaim:
+        claimName: task-pv-claim  
