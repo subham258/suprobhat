@@ -42,6 +42,12 @@ spec:
         app: nginx
     spec:
       volumes:
+      - name: config
+        configMap:
+          name: nginx-config
+          items:
+          - key: config
+            path: site.conf
       - name: site-data
         persistentVolumeClaim:
           claimName: task-pv-claim
