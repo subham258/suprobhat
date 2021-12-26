@@ -12,12 +12,12 @@ spec:
     tier: mysql
   clusterIP: None
 ---
-kind: PersistentVolume
 apiVersion: v1
+kind: PersistentVolume
 metadata:
-  name: mysql-pv
+  name: mysql-pv-volume
   labels:
-    app: wordpress
+    type: local
 spec:
   storageClassName: manual
   capacity:
@@ -25,14 +25,12 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/data/mysql"
+    path: "/mnt/data"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claim
-  labels:
-    app: wordpress
 spec:
   storageClassName: manual
   accessModes:
@@ -41,34 +39,31 @@ spec:
     requests:
       storage: 2Gi
 ---
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-mysql
-  labels:
-    app: wordpress
+  name: mysql
 spec:
   selector:
     matchLabels:
-      app: wordpress
-      tier: mysql
+      app: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: wordpress
-        tier: mysql
+        app: mysql
     spec:
       containers:
       - image: mysql:5.6
         name: mysql
         env:
+          # Use secret in real usage
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mysql-pass
-              key: password            
+              key: password
         ports:
         - containerPort: 3306
           name: mysql
