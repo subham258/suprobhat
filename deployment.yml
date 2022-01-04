@@ -55,7 +55,7 @@ spec:
       - name: nginx
         image: subham258/sonu:v-1
         volumeMounts:
-        - mountPath: "/usr/share/nginx/html"
+        - mountPath: "/var/www/html"
           name: site-data
         - name: config
-          mountPath: /etc/nginx/conf.d  
+          mountPath: /etc/httpd/conf.d  
