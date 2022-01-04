@@ -1,5 +1,5 @@
 <?php
-    $servername='localhost';
+    $servername='wordpress-mysql';
     $username='root';
     $password='Root@1234';
     $dbname = "test";
