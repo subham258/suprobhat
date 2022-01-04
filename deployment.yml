@@ -53,7 +53,7 @@ spec:
           claimName: task-pv-claim
       containers:
       - name: nginx
-        image: subham258/sonu:v-1
+        image: satya2506/sattu:v3
         volumeMounts:
         - mountPath: "/var/www/html"
           name: site-data
